@@ -51,7 +51,7 @@ const SignupForm = () => {
     } */
 //Implement addUser and error from ADD_USER mutation
     try {
-      const  data  = await addUser({
+      const { data }   = await addUser({
         variables: {...userFormData}
       });
       console.log(data);
@@ -59,14 +59,14 @@ const SignupForm = () => {
       if(error) {
         throw new Error('something went wrong!');
       }
-      console.log(data.user);
-      Auth.login(data.login.token);
-      console.log(Auth.login(data.login.token));
+      console.log("data",data.addUser.token);
+      Auth.login(data.addUser.token);
+      console.log("this is the token",Auth.login(data.login.token));
     } catch (err) {
       console.error("something went wrong",err);
       setShowAlert(true);
     }
-
+    
     setUserFormData({
       username: '',
       email: '',
