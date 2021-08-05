@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-/* import { createUser } from '../utils/API'; */
 //Replace the addUser() functionality imported from the API file with the ADD_USER mutation functionality.
 import { ADD_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/react-hooks';
@@ -35,23 +34,9 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
-   /*  try {
-      const response = await createUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
-    } */
 //Implement addUser and error from ADD_USER mutation
     try {
-      const { data }   = await addUser({
+      const {data }  = await addUser({
         variables: {...userFormData}
       });
       console.log(data);
@@ -59,9 +44,8 @@ const SignupForm = () => {
       if(error) {
         throw new Error('something went wrong!');
       }
-      console.log("data",data.addUser.token);
+      /* console.log("data",data.addUser.token); */
       Auth.login(data.addUser.token);
-      console.log("this is the token",Auth.login(data.login.token));
     } catch (err) {
       console.error("something went wrong",err);
       setShowAlert(true);

@@ -1,8 +1,7 @@
-/* import React, { useState, useEffect } from 'react'; */
+
 import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-/* import { getMe, deleteBook } from '../utils/API'; */
 import Auth from '../utils/auth';
 /* import { removeBookId } from '../utils/localStorage'; */
 
@@ -12,35 +11,6 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 
 const SavedBooks = () => {
- /*  const [userData, setUserData] = useState({}); */
-
-  // use this to determine if `useEffect()` hook needs to run again
-  /* const userDataLength = Object.keys(userData).length; */
-
-  /* useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-        if (!token) {
-          return false;
-        }
-
-        const response = await getMe(token);
-
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
-
-        const user = await response.json();
-        setUserData(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    getUserData();
-  }, [userDataLength]); */
 
 //Instead, use the useQuery() Hook to execute the GET_ME query on load and save it to a variable named userData.
   const { loading, data} = useQuery(GET_ME);
@@ -55,20 +25,7 @@ const SavedBooks = () => {
       return false;
     }
 
-   /*  try {
-      const response = await deleteBook(bookId, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
-      removeBookId(bookId);
-    } catch (err) {
-      console.error(err);
-    } */
+   
 //Use the useMutation() Hook to execute the REMOVE_BOOK mutation in the handleDeleteBook() function instead of the deleteBook() function that's imported from API file. (Make sure you keep the removeBookId() function in place!)
     try {
       await removeBook({
@@ -87,7 +44,6 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  /* if (!userDataLength) { */
     if (loading) {
     return <h2>LOADING...</h2>;
   }
