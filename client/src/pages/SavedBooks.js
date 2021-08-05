@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react'; */
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 /* import { getMe, deleteBook } from '../utils/API'; */
@@ -50,6 +51,7 @@ const SavedBooks = () => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
+      console.log("Token issue")
       return false;
     }
 
@@ -79,7 +81,8 @@ const SavedBooks = () => {
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
-      console.error(err);
+      
+      console.error("Remove Book Error",err);
     }
   };
 
