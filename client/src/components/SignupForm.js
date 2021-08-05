@@ -16,6 +16,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 //Get addUser and error from ADD_USER mutation
   const [addUser, { error }] = useMutation(ADD_USER);
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,9 +25,11 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(userFormData);
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
+    console.log(form.checkValidity());
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -48,17 +51,19 @@ const SignupForm = () => {
     } */
 //Implement addUser and error from ADD_USER mutation
     try {
-      const { data } = await addUser({
+      const  data  = await addUser({
         variables: {...userFormData}
       });
+      console.log(data);
 
       if(error) {
         throw new Error('something went wrong!');
       }
       console.log(data.user);
       Auth.login(data.login.token);
+      console.log(Auth.login(data.login.token));
     } catch (err) {
-      console.error(err);
+      console.error("something went wrong",err);
       setShowAlert(true);
     }
 
