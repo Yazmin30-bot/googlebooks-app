@@ -16,7 +16,6 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "error-ex": "github:Qix-/node-error-ex",
     "graphql": "^15.5.1"
   }
 }
